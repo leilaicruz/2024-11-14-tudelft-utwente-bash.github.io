@@ -1,0 +1,1258 @@
+---
+format:
+  revealjs:
+    incremental: false
+    css: styles.css
+execute: 
+  echo: true
+---
+
+# The Unix Shell
+
+[SWC @ University of Twente (General information)](https://4turesearchdata-carpentries.github.io/2024-11-11-tudelft/)
+
+November 11, 09:00-14:00 CEST
+
+Néstor DelaPaz-Ruíz
+
+
+# [Credits](https://github.com/joelnitta/2024-05-27-tudelft-online-bash)
+
+Joel H. Nitta
+
+# [Set up](https://swcarpentry.github.io/shell-novice/index.html)
+
+## Example data
+
+- Download [shell-lesson-data.zip](https://swcarpentry.github.io/shell-novice/data/shell-lesson-data.zip) and move the file to your Desktop.
+
+- Unzip/extract the file. **You should end up with a new folder called shell-lesson-data on your Desktop.**
+
+## Open a new shell
+
+For instructions by operating system, see the [Shell Lesson](https://swcarpentry.github.io/shell-novice/#where-to-type-commands-how-to-open-a-new-shell)
+
+# [Introducing the shell](https://swcarpentry.github.io/shell-novice/01-intro.html)
+
+## Human-computer interaction
+
+- Humans interact with computers using **GUI** (graphical user interface) or **CLI** (command-line interface).
+
+- **GUI**: Intuitive, menu-driven, but not efficient for repetitive tasks.
+
+- **CLI** (Unix shell): Efficient for repetitive tasks, automates tasks quickly.
+
+## The Shell {.smaller}
+
+- The shell **interprets** and **runs** the commands typed by the user.
+
+- Popular Unix shell: **Bash** (**B**ourne **A**gain **SH**ell).
+
+- Benefits of using the shell:
+  - Automates repetitive tasks
+  - Efficient data handling with powerful pipelines
+  - Essential for remote machine interaction and high-performance computing
+  - Many open-source software programs must be used via a CLI
+
+---
+
+- Today we will learn how to interact with the shell via **commands**
+
+## Shell interface
+
+When you open the shell, you should see something like this:
+
+```
+$
+```
+
+## Shell interface
+
+- The `$` is the **prompt**, where you type your commands
+
+- Depending on your setup, it may look a little different, for example:
+
+```
+nelle@localhost $
+```
+
+## `ls`
+
+The first command we will learn is `ls`, which **lists** the content of your current directory (we will come back to this later):
+
+```bash
+ls
+```
+
+```
+Desktop     Downloads   Movies      Pictures
+Documents   Library     Music       Public
+```
+
+## Nelle's Pipeline
+
+- The example dataset is based on a story about "Nelle Nemo"
+  - Context: Nelle Nemo is a marine biologist who samples marine life.
+  - Nelle's Goal: Process 1520 samples with `goostats.sh` to measure protein abundance.
+
+Using a GUI, Nelle would need to manually run 1520 files, taking over 12 hours. **Can Nelle do this more efficiently with the shell?**
+
+# [Navigating files and folders](https://swcarpentry.github.io/shell-novice/02-filedir.html)
+
+## Questions
+
+- How can I move around on my computer?
+
+- How can I see what files and directories I have?
+
+- How can I specify the location of a file or directory on my computer?
+
+## What is a File System?
+
+- **File System**: Manages files and directories.
+  - **Files**: Hold information (data).
+  - **Directories** (= Folders): Hold files or other directories.
+
+## Where are we?
+
+Use `pwd` to show your current working directory (where you "are" in your computer)
+
+
+---
+
+![](https://swcarpentry.github.io/shell-novice/fig/filesystem.svg)
+
+## Slashes
+
+- There are two meanings for the `/` character.
+  - When it appears at the front of a file or directory name, it refers to the **root directory**.
+  - When it appears inside a path, it’s just a **separator**.
+
+---
+
+![](https://swcarpentry.github.io/shell-novice/fig/home-directories.svg)
+
+For example, Nelle's files are stored in `/Users/nelle.`
+
+## List files with `ls`
+
+- Use the `-F` **option** to adjust the output:
+  - a trailing `/` indicates that this is a directory
+  - `@` indicates a link
+  - `*` indicates an executable
+
+```bash
+ls -F
+```
+
+## Clear the terminal
+
+You can clear a cluttered terminal with `clear`
+
+## Help
+
+Get a help menu by adding `--help`:
+
+```bash
+ls --help
+```
+
+## Help
+
+Or, add `man` in front of the command:
+
+```bash
+man ls
+```
+
+## Challenge: `ls` {.smaller}
+
+![](https://swcarpentry.github.io/shell-novice/fig/filesystem-challenge.svg){height=250px}
+
+If `pwd` displays `/Users/backup`, and `-r` tells `ls` to display things in reverse order, **what command(s) will result in the following output:**
+
+```
+pnas_sub/ pnas_final/ original/
+```
+
+1. `ls pwd`
+1. `ls -r -F`
+1. `ls -r -F /Users/backup`
+
+## Exploring other directories
+
+```bash
+ls -F Desktop
+```
+
+## Move into other directories with `cd`
+
+```bash
+cd Desktop
+cd shell-lesson-data
+cd exercise-data
+```
+
+## Shortcuts for moving: `..`
+
+`..` takes you one directory higher
+
+```bash
+cd ..
+```
+
+## Shortcuts for moving: `..`
+
+Note that if you use `ls -a` to show everything, you will see `..`
+
+## Shortcuts for moving: `~`
+
+You can use `~` to move to your **home directory**
+
+## Shortcuts for moving: `-`
+
+You can use `-` to move back to the directory you just came from
+
+## Absolute vs. relative paths
+
+If you type a path that does not start with `/`, it means you are talking about a folder or file **relative to your current location**
+
+If you type a path that starts with `/`, it means you are talking about a path **from the root of the file system**
+
+---
+
+## Challenge: relative paths {.smaller}
+
+![](https://swcarpentry.github.io/shell-novice/fig/filesystem-challenge.svg){height=250px}
+
+
+If `pwd` displays `/Users/thing`, **what will `ls -F ../backup` display?**
+
+1. `../backup: No such file or directory`
+1. `2012-12-01 2013-01-08 2013-01-27`
+1. `2012-12-01/ 2013-01-08/ 2013-01-27/`
+1. `original/ pnas_final/ pnas_sub/`
+
+## General Syntax of a Shell Command
+
+![](https://swcarpentry.github.io/shell-novice/fig/shell_command_syntax.svg)
+
+## General Syntax of a Shell Command
+
+- Options can usually be written in two ways:
+  - Long form `--` (`ls --all`)
+  - Short form `-` (`ls -a`)
+- Spaces matter (`ls-F` means the command "ls-F")
+- Capitalization matters (`ls -s` vs `ls -S`)
+
+## Tab completion
+
+The shell will finish typing the names of files and folders for you when you press the tab key
+
+Try it from `~/Desktop/shell-lesson-data/`
+
+```bash
+ls north-pacific-gyre/
+```
+
+```bash
+ls north-pacific-gyre/goo
+```
+
+(press the tab key twice to see what files start with `goo`)
+
+# [Working With Files and Directories](https://swcarpentry.github.io/shell-novice/03-create.html)
+
+## Questions
+
+- How can I create, copy, and delete files and directories?
+
+- How can I edit files?
+
+## Make a new directory with `mkdir`
+
+- Make sure we are in `shell-lesson-data`, then enter `exercise-data/writing`
+
+- Have a look around, then create a new directory called `thesis`:
+
+```bash
+mkdir thesis
+```
+
+## Make a new directory with `mkdir`
+
+You can create a nested directory using `-p`
+
+```bash
+mkdir -p ../project/data ../project/results
+```
+
+Check what you did (`-R` is the option to `ls` that will list all nested subdirectories within a directory):
+
+```bash
+ls -FR ../project
+```
+
+## Best practices: names for files and directories
+
+1. Don’t use spaces.
+2. Don’t begin the name with `-` (dash).
+3. Stick with letters, numbers, `.` (period or ‘full stop’), `-` (dash) and `_` (underscore).
+
+## Create a text file
+
+`nano` is a text editor program. It will create a file and open it for editing.
+
+```bash
+cd thesis
+nano draft.txt
+```
+
+---
+
+![](https://swcarpentry.github.io/shell-novice/fig/nano-screenshot.png)
+
+Press `Ctrl+o` to save (as indicated by `^O`), then `Ctrl+x` to exit
+
+## Create a text file with `touch`
+
+```bash
+touch my_file.txt
+```
+
+## Delete a file with `rm`
+
+```bash
+rm my_file.txt
+```
+
+- `rm` is forever! (no recycle bin). **Be very careful** when you use it.
+
+## Move or rename files and folders with `mv`
+
+Enter `shell-lesson-data/exercise-data/writing`:
+
+```bash
+cd ~/Desktop/shell-lesson-data/exercise-data/writing
+```
+
+Let's rename `draft.txt`:
+
+```bash
+mv thesis/draft.txt thesis/quotes.txt
+```
+
+(check the results with `ls`)
+
+## Move or rename files and folders with `mv`
+
+- Like `rm`, there is no "undo" button for `mv`: it will over-write any file with the same name, so **use carefully!**
+
+Let's move `quotes.txt` into our current directory:
+
+```bash
+mv thesis/quotes.txt .
+```
+
+Check `ls thesis`
+
+## Copy files and folders with `cp`
+
+- `cp` is similar to `mv`, but copies instead of moves
+
+```bash
+cp quotes.txt thesis/quotations.txt
+ls quotes.txt thesis/quotations.txt
+```
+
+## Copy files and folders with `cp`
+
+- Note that you can't just `cp` a folder:
+
+```bash
+cp thesis thesis_backup
+```
+
+```
+cp: -r not specified; omitting directory 'thesis'
+```
+
+## Copy files and folders with `cp`
+
+- To copy a folder and all its contents, use the `-r` (**r**ecursive) option
+
+```bash
+cp -r thesis thesis_backup
+```
+
+## Delete folders with `rm -r`
+
+- Similar to using `-r` for `cp`, you need `-r` to delete a folder:
+
+```bash
+rm -r thesis
+```
+
+- Again, **be careful!!**
+
+## Moving, copying, or removing multiple files
+
+- You can move or copy multiple files to a folder by typing all the file names first, then the folder last.
+  - Let's test this in `shell-lesson-data/exercise-data`:
+
+```bash
+mkdir backup
+cp creatures/minotaur.dat creatures/unicorn.dat backup/
+```
+
+## Using wildcards for accessing multiple files at once
+
+- Moving multiple files at once is handy, but that was a lot of typing
+
+- We can use `*` and `?` to match multiple file names. These are called "wildcards"
+
+## Using wildcards for accessing multiple files at once
+
+- Consider the files in `shell-lesson-data/exercise-data/alkanes`:
+
+- `*`: Represents zero or more characters.
+  - Example: `*.pdb` matches `ethane.pdb`, `propane.pdb`, etc.
+  - Example: `p*.pdb` matches `pentane.pdb`, `propane.pdb`.
+
+## Using wildcards for accessing multiple files at once
+
+- `?`: Represents exactly one character.
+  - Example: `?ethane.pdb` matches `methane.pdb`.
+  - Example: `*ethane.pdb` matches `ethane.pdb`, `methane.pdb`.
+  - Example: `???ane.pdb` matches `cubane.pdb`, `ethane.pdb`, `octane.pdb`.
+
+## Wildcard expansion
+
+- Shell expands wildcards to list matching filenames **before running the command**.
+- If no match, the wildcard expression is passed as is.
+- Example: `ls *.pdf` in a directory with only `.pdb` files results in an error.
+
+## Challenge: List filenames matching a pattern
+
+When run in the `alkanes` directory, which `ls` command(s) will produce this output?
+
+```
+ethane.pdb methane.pdb
+```
+
+1. `ls *t*ane.pdb`
+1. `ls *t?ne.*`
+1. `ls *t??ne.pdb`
+1. `ls ethane.*`
+
+## Challenge: Organizing {.smaller}
+
+Jamie is working on a project, and she sees that her files aren’t very well organized:
+
+```bash
+$ ls -F
+analyzed/  fructose.dat    raw/   sucrose.dat
+```
+
+The `fructose.dat` and `sucrose.dat` files contain output from her data analysis. **What command(s) covered in this lesson does she need to run so that the commands below will produce the output shown?**
+
+``` bash
+$ ls -F
+analyzed/   raw/
+```
+
+``` bash
+$ ls analyzed
+fructose.dat    sucrose.dat
+```
+
+## Challenge: Reproduce a file structure {.smaller}
+
+You’re starting a new experiment and would like to duplicate the directory structure from your previous experiment so you can add new data.
+
+Assume that the previous experiment is in a folder called `2016-05-18`, which contains a data folder that in turn contains folders named raw and processed that contain data files. The goal is to copy the folder structure of the `2016-05-18` folder into a folder called `2016-05-20` so that your final directory structure looks like this:
+
+```
+2016-05-20/
+└── data
+   ├── processed
+   └── raw
+```
+
+**Which of the following set of commands would achieve this objective? What would the other commands do?**
+
+[See answer options here](https://swcarpentry.github.io/shell-novice/03-create.html#reproduce-a-folder-structure)
+
+# [Pipes and Filters](https://swcarpentry.github.io/shell-novice/04-pipefilter.html)
+
+## Questions
+
+- How can I combine existing commands to produce a desired output?
+
+- How can I show only part of the output?
+
+## Example: how big are the `pdb` files?
+
+- Nelle needs to determine the `pdb` file **with the fewest lines of text** in the `shell-lesson-data/exercise-data/alkanes` directory.
+
+- She can do this with `wc`, which counts text in a file:
+
+```bash
+$ wc cubane.pdb
+20  156 1158 cubane.pdb
+```
+
+- The output shows number of lines, words, and characters
+
+## Use a wildcard to apply `wc` to all files
+
+Check the number of lines of text in all `.pdb` files:
+
+```bash
+wc -l *.pdb
+```
+
+This works for a few, but what if we had thousands?
+
+## Save output to a text file
+
+Let's send the results to a file with `>` and read out the contents with `cat`:
+
+```bash
+wc -l *.pdb > lengths.txt
+cat lengths.txt
+```
+
+(note that `>>` will **add to** an existing file)
+
+## Sort the output
+
+Next, use `sort` to sort the output, then save it to a file, then finally get the first entry of that file with `head`:
+
+```bash
+sort -n lengths.txt
+sort -n lengths.txt > sorted-lengths.txt
+head -n 1 sorted-lengths.txt
+```
+
+Whew! We did it!
+
+## Challenge: Appending Data {.smaller}
+
+`tail` is similar to `head`, but prints lines from the **end of a file instead**.
+
+Consider the file `shell-lesson-data/exercise-data/animal-counts/animals.csv`. After these commands, select the answer that corresponds to the file `animals-subset.csv`:
+
+```bash
+$ head -n 3 animals.csv > animals-subset.csv
+$ tail -n 2 animals.csv >> animals-subset.csv
+```
+
+1.  The first three lines of `animals.csv`
+2.  The last two lines of `animals.csv`
+3.  The first three lines and the last two lines of `animals.csv`
+4.  The second and third lines of `animals.csv`
+
+## The pipe
+
+- So that worked, but it relied on two intermediate text files (`lengths.txt` and `sorted-lengths.txt`). That is confusing.
+
+- We can streamline the analysis by sending the results of one command directly into the input of another with the pipe: `|`
+
+```bash
+sort -n lengths.txt | head -n 1
+```
+
+## Chaining pipes
+
+- In fact, we can **combine multiple commands with multiple pipes**. That way we don't need any intermediate files!
+
+```bash
+wc -l *.pdb | sort -n
+wc -l *.pdb | sort -n | head -n 1
+```
+
+---
+
+![](https://swcarpentry.github.io/shell-novice/fig/redirects-and-pipes.svg)
+
+## Nelle’s Pipeline: Checking Files
+
+- Nelle has run her samples through the assay machines and created 17 files in `north-pacific-gyre`
+
+```bash
+cd north-pacific-gyre
+wc -l *.txt
+```
+
+## Nelle’s Pipeline: Checking Files
+
+- Nelle checks to see if any files are much **shorter** than the others
+
+```bash
+wc -l *.txt | sort -n | head -n 5
+```
+
+## Nelle’s Pipeline: Checking Files
+
+- Nelle checks to see if any files are much **longer** than the others
+
+```bash
+wc -l *.txt | sort -n | tail -n 5
+```
+
+```
+ 300 NENE02040B.txt
+ 300 NENE02040Z.txt
+ 300 NENE02043A.txt
+ 300 NENE02043B.txt
+5040 total
+```
+
+- What's that file with a `Z`?
+
+## Nelle’s Pipeline: Checking Files
+
+- All of Nelle's samples should be marked `A` or `B`; by convention, her lab uses `Z` to indicate samples with missing information. To find others like it, she does this:
+
+```
+ls *Z.txt
+```
+
+- Remember this for future exercises: Nelle will need to select files with `NENE*A.txt` or `NENE*B.txt`
+
+## Challenge: Removing Unneeded Files {.smaller}
+
+Suppose you want to delete your processed data files, and only keep your raw files and processing script to save storage.
+
+The raw files end in `.dat` and the processed files end in `.txt`.
+
+**Which of the following would remove all the processed data files, and *only* the processed data files?**
+
+1. `rm ?.txt`
+2. `rm *.txt`
+3. `rm * .txt`
+4. `rm *.*`
+
+## Challenge: Pipe Reading {.smaller}
+
+A file called `animals.csv` (in the `shell-lesson-data/exercise-data/animal-counts` folder) contains the following data:
+
+``` source
+2012-11-05,deer,5
+2012-11-05,rabbit,22
+2012-11-05,raccoon,7
+2012-11-06,rabbit,19
+2012-11-06,deer,2
+2012-11-06,fox,4
+2012-11-07,rabbit,16
+2012-11-07,bear,1
+```
+
+**What are the contents of `final.txt`?** (the `sort -r` command sorts in reverse)
+
+``` bash
+$ cat animals.csv | head -n 5 | tail -n 3 | sort -r > final.txt
+```
+
+# [Loops](https://swcarpentry.github.io/shell-novice/05-loop.html)
+
+## Questions
+
+- How can I perform the same actions on many different files?
+
+## About loops
+
+- **Loops** allow us to repeat the same command as many times as needed
+  - reduces typing effort
+  - minimizes typing mistakes
+
+## Using loops to extract data {.smaller}
+
+- Scenario: Extract classification from genome files.
+
+- Files: `basilisk.dat`, `minotaur.dat`, `unicorn.dat` in `exercise-data/creatures`
+
+- Structure:
+  - 1st line: Common name
+  - 2nd line: Taxonomic classification
+  - 3rd line: Updated date
+  - Following lines: DNA sequences
+
+```bash
+head -n 5 basilisk.dat minotaur.dat unicorn.dat
+```
+
+## Using loops to extract data
+
+Our goal: **Print the classification (2nd line) for each file.**
+
+General form of a loop:
+
+``` bash
+for thing in list_of_things
+do
+    operation_using/command $thing
+done
+```
+
+## Using loops to extract data
+
+For our situation:
+
+``` bash
+$ for filename in basilisk.dat minotaur.dat unicorn.dat
+> do
+>     echo $filename
+>     head -n 2 $filename | tail -n 1
+> done
+```
+
+`$filename` is a **variable** that gets filled in by the shell
+
+## A few details... {.smaller}
+
+- The shell prompt changes from `$` to `>` and back again as we were typing in our loop.
+
+- A semicolon, `;`, can be used to separate two commands written on a single line.
+
+- If the *shell* prints `>` or `$` then it expects you to type something, and the symbol is a prompt.
+
+- If *you* type `>` or `$` yourself, it is an instruction from you that the shell should redirect output or get the value of a variable.
+
+- You can put the variable name in curly braces: `${filename}`. This makes it easier to distinguish the variable from surrounding text (like `${file}name`)
+
+## Hint: use meaningful variable names
+
+- In the last example, we used `for filename` and `$filename`, but we could just have easily said `for x` and `$x`. **Is this a good idea?**
+
+. . .
+
+*No*, because it is not clear **what** the variable refers to. It is better to use variable names that convey their meaning.
+
+## Challenge: Variables in loops {.smaller}
+
+This exercise refers to the `shell-lesson-data/exercise-data/alkanes`
+directory. `ls *.pdb` gives the following output:
+
+``` output
+cubane.pdb  ethane.pdb  methane.pdb  octane.pdb  pentane.pdb  propane.pdb
+```
+
+What is the output of the following code?
+
+``` bash
+$ for datafile in *.pdb
+> do
+>     ls *.pdb
+> done
+```
+
+Now, what is the output of the following code?
+
+``` bash
+$ for datafile in *.pdb
+> do
+>     ls $datafile
+> done
+```
+
+Why do these two loops give different outputs?
+
+## Challenge: Limiting Sets of Files (1/2) {.smaller}
+
+What would be the output of running the following loop in the
+`shell-lesson-data/exercise-data/alkanes` directory?
+
+``` bash
+$ for filename in c*
+> do
+>     ls $filename
+> done
+```
+
+1.  No files are listed.
+2.  All files are listed.
+3.  Only `cubane.pdb`, `octane.pdb` and `pentane.pdb` are listed.
+4.  Only `cubane.pdb` is listed.
+
+## Challenge: Limiting Sets of Files (2/2) {.smaller}
+
+How would the output differ from using this command instead?
+
+``` bash
+$ for filename in *c*
+> do
+>     ls $filename
+> done
+```
+
+1.  The same files would be listed.
+2.  All the files are listed this time.
+3.  No files are listed this time.
+4.  The files `cubane.pdb` and `octane.pdb` will be listed.
+5.  Only the file `octane.pdb` will be listed.
+
+## Challenge Saving to a File in a Loop (1/2) {.smaller}
+
+In the `shell-lesson-data/exercise-data/alkanes` directory, what is the
+effect of this loop?
+
+``` bash
+for alkanes in *.pdb
+do
+    echo $alkanes
+    cat $alkanes > alkanes.pdb
+done
+```
+
+1.  Prints `cubane.pdb`, `ethane.pdb`, `methane.pdb`, `octane.pdb`,
+    `pentane.pdb` and `propane.pdb`, and the text from `propane.pdb`
+    will be saved to a file called `alkanes.pdb`.
+2.  Prints `cubane.pdb`, `ethane.pdb`, and `methane.pdb`, and the text
+    from all three files would be concatenated and saved to a file
+    called `alkanes.pdb`.
+3.  Prints `cubane.pdb`, `ethane.pdb`, `methane.pdb`, `octane.pdb`, and
+    `pentane.pdb`, and the text from `propane.pdb` will be saved to a
+    file called `alkanes.pdb`.
+4.  None of the above.
+
+## Saving to a File in a Loop (2/2) {.smaller}
+
+Also in the `shell-lesson-data/exercise-data/alkanes` directory, what
+would be the output of the following loop?
+
+``` bash
+for datafile in *.pdb
+do
+    cat $datafile >> all.pdb
+done
+```
+
+1.  All of the text from `cubane.pdb`, `ethane.pdb`, `methane.pdb`,
+    `octane.pdb`, and `pentane.pdb` would be concatenated and saved to a
+    file called `all.pdb`.
+2.  The text from `ethane.pdb` will be saved to a file called `all.pdb`.
+3.  All of the text from `cubane.pdb`, `ethane.pdb`, `methane.pdb`,
+    `octane.pdb`, `pentane.pdb` and `propane.pdb` would be concatenated
+    and saved to a file called `all.pdb`.
+4.  All of the text from `cubane.pdb`, `ethane.pdb`, `methane.pdb`,
+    `octane.pdb`, `pentane.pdb` and `propane.pdb` would be printed to
+    the screen and saved to a file called `all.pdb`.
+
+## Nelle’s Pipeline: Processing Files
+
+- Context: Nelle needs to process protein sample files using `goostats.sh`.
+
+- Script: `goostats.sh` calculates statistics from a protein sample file.
+  - Takes two arguments:
+    - Input file: Raw data file.
+    - Output file: File to store calculated statistics.
+
+## Nelle’s Pipeline, step 1
+
+- Nelle decides to build commands step-by-step.
+
+- Step 1: Select the right input files.
+  - Criteria: Filenames ending in `A` or `B`, not `Z`.
+
+``` bash
+$ cd
+$ cd Desktop/shell-lesson-data/north-pacific-gyre
+$ for datafile in NENE*A.txt NENE*B.txt
+> do
+>     echo $datafile
+> done
+```
+
+## Nelle’s Pipeline, step 2
+
+- Next step: decide what to call the files that the `goostats.sh` analysis program will create. 
+
+- Prefixing each input file’s name with `stats` seems clear:
+
+``` bash
+$ for datafile in NENE*A.txt NENE*B.txt
+> do
+>     echo $datafile stats-$datafile
+> done
+```
+
+## Nelle’s Pipeline, step 3 {.smaller}
+
+- Instead of typing in everything again, press the up arrow key:
+
+``` bash
+for datafile in NENE*A.txt NENE*B.txt; do echo $datafile stats-$datafile; done
+```
+
+The `;` has the same effect as a line-break
+
+- Go back into the command with the left-arrow key and edit it:
+
+```bash
+for datafile in NENE*A.txt NENE*B.txt; do bash goostats.sh $datafile stats-$datafile; done
+```
+
+## Nelle’s Pipeline, step 4
+
+- Why don't we see any output?
+
+. . .
+
+`goostats.sh` just writes out the results file without printing anything to the screen. Let's kill the script with `Ctrl + c`, then add an `echo` to display the name of the file:
+
+``` bash
+for datafile in NENE*A.txt NENE*B.txt; do echo $datafile;
+bash goostats.sh $datafile stats-$datafile; done
+```
+
+We can inspect the output by opening another shell window
+
+# [Shell Scripts](https://swcarpentry.github.io/shell-novice/06-script.html)
+
+## The Power of Shell Scripts
+
+- Scripts are small programs that **automate tasks**.
+  - Save frequently used commands in files.
+  - Re-run operations with a single command.
+    
+- Advantages:
+  - Speed: Faster execution of repeated tasks.
+  - Accuracy: Fewer typos.
+  - Reproducibility: Easy to reproduce results later.
+
+## First script
+
+- Navigate to `alkanes/`.
+- Create a new script file `middle.sh` and open it with `nano`:
+
+```
+cd alkanes
+nano middle.sh
+```
+
+## First script
+
+Type this in the script (it should look familiar):
+
+```bash
+head -n 15 octane.pdb | tail -n 5
+```
+
+Now we can run the script:
+
+```bash
+bash middle.sh
+```
+
+## Using a variable in a script
+
+- This script would be much more useful if we could run it on any file, not just `octane.pdb`.
+
+- Open it again in `nano` and modify it like so:
+
+```bash
+head -n 15 "$1" | tail -n 5
+```
+
+The `"$1"` means ‘the first filename (or other argument) on the command line’. Try it out!
+
+## About double quotes
+
+- We use the double quotes in case any filenames that you enter may have spaces (otherwise the shell would think they are two arguments)
+
+## Using multiple variables
+
+- We can make our script even more flexible (and useful) by allowing the user to specify the starting and ending lines:
+
+```bash
+head -n "$2" "$1" | tail -n "$3"
+```
+
+- Try it out!
+
+```bash
+bash middle.sh pentane.pdb 15 5
+```
+
+## Challenge: Variables in Shell Scripts {.smaller}
+
+In the `alkanes` directory, imagine you have a shell script called
+`script.sh` containing the following commands:
+
+``` bash
+head -n $2 $1
+tail -n $3 $1
+```
+
+While you are in the `alkanes` directory, you type the following
+command:
+
+``` bash
+$ bash script.sh '*.pdb' 1 1
+```
+
+Which of the following outputs would you expect to see?
+
+1.  All of the lines between the first and the last lines of each file
+    ending in `.pdb` in the `alkanes` directory
+2.  The first and the last line of each file ending in `.pdb` in the
+    `alkanes` directory
+3.  The first and the last line of each file in the `alkanes` directory
+4.  An error because of the quotes around `*.pdb`
+
+## Adding comments
+
+- We can make our script easier to understanding by providing some **comments** that explain how it works:
+
+```bash
+# Select lines from the middle of a file.
+# Usage: bash middle.sh filename end_line num_lines
+head -n "$2" "$1" | tail -n "$3"
+```
+
+## Processing many files in a script
+
+- So far, we have been able to input one file into a script with something like `"$1"`
+
+- But what if we have many files we want to input?
+
+. . .
+
+Solution: `"$@"`
+
+- `"$@"` means ‘All of the command-line arguments to the shell script’
+
+## Processing many files in a script
+
+- Example: a script to sort files by their length, called `sorted.sh`
+
+``` bash
+# Sort files by their length.
+# Usage: bash sorted.sh one_or_more_filenames
+wc -l "$@" | sort -n
+```
+
+Try it!
+
+``` bash
+bash sorted.sh *.pdb ../creatures/*.dat
+```
+
+## Challenge: Script Reading {.smaller}
+
+For this question, consider the
+`shell-lesson-data/exercise-data/alkanes` directory once again. This
+contains a number of `.pdb` files in addition to any other files you may
+have created. Explain what each of the following three scripts would do
+when run as `bash script1.sh *.pdb`, `bash script2.sh *.pdb`, and
+`bash script3.sh *.pdb` respectively.
+
+``` bash
+# Script 1
+echo *.*
+```
+
+``` bash
+# Script 2
+for filename in $1 $2 $3
+do
+    cat $filename
+done
+```
+
+``` bash
+# Script 3
+echo $@.pdb
+```
+
+# [Finding things](https://swcarpentry.github.io/shell-novice/07-find.html)
+
+## What is `grep`?
+
+- "To grep something" has become a verb kind of like "To google something"
+
+- `grep` is a computer program that searches for text
+
+- Our examples will use haiku about programming that were featured in *Salon* magazine
+
+```bash
+cd 
+cd Desktop/shell-lesson-data/exercise-data/writing
+cat haiku.txt
+```
+
+## First `grep` example
+
+- Let's find lines of text with the word `not`:
+
+``` bash
+grep not haiku.txt
+```
+
+## Matching whole words
+
+- What happens when we search for `The`
+
+``` bash
+grep The haiku.txt
+```
+
+. . .
+
+- It matches `Thesis`. How can we match only the **whole word** `The`?
+  - Use `-w` (for "word")
+
+## Matching phrases
+
+- Use quotes
+
+``` bash
+grep -w "is not" haiku.txt
+```
+
+. . .
+
+- Actually, it's better to use quotes even with single words to make clear what you are searching for vs. the file you are searching
+
+## Display matching line numbers with `-n`
+
+``` bash
+grep -n "it" haiku.txt
+```
+
+## Combining options (flags)
+
+- `-n`: Show the line number
+- `-w`: Only match whole words
+- `-i`: Make search case-insensitive
+
+``` bash
+grep -n -w -i "the" haiku.txt
+```
+
+(you can also combine these into `-nwi`)
+
+## Inversion
+
+- *Invert* the search (match all **other** lines) with `-v`:
+
+``` bash
+grep -nwv "the" haiku.txt
+```
+
+## Recursive search
+
+- Match a string in **multiple** files with `-r`:
+
+``` bash
+grep -r "Yesterday" .
+```
+
+## Regular expressions
+
+- The `re` in `grep` stands for "Regular Expressions"
+
+- Regular expressions are kind of like wildcards: they can match certain patterns in text
+
+- This is one of the most **powerful** features of `grep`
+
+For example, this finds any text with an "o" as the second character (`-E` turns on matching via regular expressions, the `^` matches the start of a line, and the `.` matches any single character):
+
+``` bash
+ grep -E "^.o" haiku.txt
+```
+
+## Challenge: Using `grep`
+
+Which command would result in the following output:
+
+``` output
+and the presence of absence:
+```
+
+1.  `grep "of" haiku.txt`
+2.  `grep -E "of" haiku.txt`
+3.  `grep -w "of" haiku.txt`
+4.  `grep -i "of" haiku.txt`
+
+## About `find`
+
+- While `grep` finds lines in files, the `find` command finds files themselves.
+
+Try it out from `shell-lesson-data/exercise-data`:
+
+``` bash
+find .
+```
+
+## Find directories with `-type d`
+
+``` bash
+find . -type d
+```
+
+## Find files with `-type f`
+
+``` bash
+find . -type f
+```
+
+## Find files matching a particular name with `-name`
+
+``` bash
+find . -name *.txt
+```
+
+. . .
+
+Wait a sec - I thought there were more text files?
+
+- This behavior is because of **shell expansion**
+  - bash interpreted this command as `find . -name numbers.txt`
+
+## Find files matching a particular name with `-name`
+
+- We need to prevent the shell from expanding the names of files by putting that part in quotes
+
+``` bash
+find . -name "*.txt"
+```
+
+## Combining `wc` and `find`
+
+- Let's count lines of text in `.txt` files:
+
+``` bash
+wc -l $(find . -name "*.txt")
+```
+
+- The code in parenthesis gets run first
+
+## Combining `grep` and `find`
+
+- Let's find txt files that contain the word “searching” by looking for the string ‘searching’ in all the `.txt` files in the current directory:
+
+``` bash
+grep "searching" $(find . -name "*.txt")
+```
+
+## The power of small programs together
+
+- By combining relatively simple, small programs using techniques like `$()` and the pipe (`|`), we can achieve very powerful results with a small amount of code
+
+- This is the beauty of the shell!
+
+## Challenge: Matching and Subtracting {.smaller}
+
+Remember, the `-v` option to `grep` inverts pattern matching, so that only lines
+which do *not* match the pattern are printed. Given that, which of the
+following commands will find all .dat files in `creatures` except
+`unicorn.dat`? Once you have thought about your answer, you can test the
+commands in the `shell-lesson-data/exercise-data` directory.
+
+1.  `find creatures -name "*.dat" | grep -v unicorn`
+2.  `find creatures -name *.dat | grep -v unicorn`
+3.  `grep -v "unicorn" $(find creatures -name "*.dat")`
+4.  None of the above.

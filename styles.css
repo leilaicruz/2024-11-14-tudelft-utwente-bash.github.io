@@ -1,0 +1,5 @@
+/* css styles */
+
+pre, pre code, .reveal pre code {
+  font-size: 80% !important; /* 120% of the body font size */
+}
