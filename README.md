@@ -1,4 +1,4 @@
-## 2024-05-27-tudelft-online-bash
+## 2024-11-14-tudelft-utwente-bash
 
 Slides for Software Carpenty Workshop [2024-11-11-tudelft-online](https://4turesearchdata-carpentries.github.io/2024-11-11-tudelft/)
 
