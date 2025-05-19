@@ -9,9 +9,9 @@ execute:
 
 # The Unix Shell
 
-[SWC @ University of Twente (General information)](https://4turesearchdata-carpentries.github.io/2024-11-11-tudelft/)
+[SWC @ University of Twente (General information)](https://4turesearchdata-carpentries.github.io/2025-05-19-tudelft/)
 
-November 11, 09:00-14:00 CEST
+May 19 2025, 09:00-14:00 CEST
 
 Néstor DelaPaz-Ruíz
 
