@@ -1,33 +1,62 @@
-on:
-  workflow_dispatch:
-  push:
-    branches: main
-
 name: Quarto Publish
 
+on:
+  workflow_dispatch:
+    inputs:
+      method:
+        description: 'Build method'
+        required: true
+        default: 'r'
+        type: choice
+        options: ['r','conda']
+  push:
+    branches: [ main ]
+
 jobs:
-  build-deploy:
+  build-and-publish:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+
+    strategy:
+      matrix:
+        method: [ ${{ github.event.inputs.method }} ]
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Set up Quarto
-        uses: quarto-dev/quarto-actions/setup@v2
-
-      - name: Install R
+      # === R-based build ===
+      - name: Install R & renv         ## only if building with R
+        if: matrix.method == 'r'
         uses: r-lib/actions/setup-r@v2
         with:
           r-version: '4.2.0'
 
-      - name: Install R Dependencies
+      - name: Restore R dependencies   ## only if building with R
+        if: matrix.method == 'r'
         uses: r-lib/actions/setup-renv@v2
         with:
           cache-version: 1
 
-      - name: Render and Publish
+      # === Conda-based build ===
+      - name: Set up Miniconda         ## only if building with Conda
+        if: matrix.method == 'conda'
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          auto-update-conda: true
+          environment-file: environment.yml
+          activate-environment: bash-presentation
+
+      - name: (Optional) install reveal-md
+        if: matrix.method == 'conda'
+        run: npm install -g reveal-md
+
+      # === Common Quarto steps ===
+      - name: Set up Quarto CLI
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Render & Publish
         uses: quarto-dev/quarto-actions/publish@v2
         with:
           target: gh-pages

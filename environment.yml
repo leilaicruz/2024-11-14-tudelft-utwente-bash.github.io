@@ -1,0 +1,8 @@
+name: reveal-presentation
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.8            # for http.server (and general tooling)
+  - quarto                  # Quarto CLI (bundles its own Pandoc)
+  - pandoc                  # if you ever need standalone Pandoc
+  - nodejs                  # for npm, so you can install reveal-md if desired
