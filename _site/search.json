@@ -2,273 +2,273 @@
   {
     "objectID": "slides.html#exploring-more-ls-options",
     "href": "slides.html#exploring-more-ls-options",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "Exploring More ls Options",
     "text": "Exploring More ls Options\nYou can also use two options at the same time. What does the command ls do when used with the -l option? What about if you use both the -l and the -h option?\nSome of its output is about properties that we do not cover in this lesson (such as file permissions and ownership), but the rest should be useful nevertheless."
   },
   {
     "objectID": "slides.html#listing-in-reverse-chronological-order",
     "href": "slides.html#listing-in-reverse-chronological-order",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "Listing in Reverse Chronological Order",
     "text": "Listing in Reverse Chronological Order\nBy default, ls lists the contents of a directory in alphabetical order by name. The command ls -t lists items by time of last change instead of alphabetically. The command ls -r lists the contents of a directory in reverse order. Which file is displayed last when you combine the -t and -r options? Hint: You may need to use the -l option to see the last changed dates."
   },
   {
     "objectID": "slides.html#absolute-vs-relative-paths",
     "href": "slides.html#absolute-vs-relative-paths",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "Absolute vs Relative Paths",
     "text": "Absolute vs Relative Paths\nStarting from /Users/nelle/data, which of the following commands could Nelle use to navigate to her home directory, which is /Users/nelle?\n\ncd .\ncd /\ncd /home/nelle\ncd ../..\ncd ~\ncd home\ncd ~/data/..\ncd\ncd .."
   },
   {
     "objectID": "slides.html#relative-path-resolution",
     "href": "slides.html#relative-path-resolution",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "Relative Path Resolution",
     "text": "Relative Path Resolution\nUsing the filesystem diagram below, if pwd displays /Users/thing, what will ls -F ../backup display?\n\n../backup: No such file or directory\n2012-12-01 2013-01-08 2013-01-27\n2012-12-01/ 2013-01-08/ 2013-01-27/\noriginal/ pnas_final/ pnas_sub/"
   },
   {
     "objectID": "slides.html#ls-reading-comprehension",
     "href": "slides.html#ls-reading-comprehension",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "ls Reading Comprehension",
     "text": "ls Reading Comprehension\nUsing the filesystem diagram below, if pwd displays /Users/backup, and -r tells ls to display things in reverse order, what command(s) will result in the following output:\npnas_sub/ pnas_final/ original/\n\n\nls pwd\nls -r -F\nls -r -F /Users/backup"
   },
   {
     "objectID": "slides.html#creating-files-a-different-way",
     "href": "slides.html#creating-files-a-different-way",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "Creating Files a Different Way",
     "text": "Creating Files a Different Way\nWe have seen how to create text files using the nano editor. Now, try the following command:\n$ touch my_file.txt\n\nWhat did the touch command do? When you look at your current directory using the GUI file explorer, does the file show up?\nUse ls -l to inspect the files. How large is my_file.txt?\nWhen might you want to create a file this way?\n\nTo avoid confusion later on, we suggest removing the file you’ve just created before proceeding with the rest of the episode, otherwise future outputs may vary from those given in the lesson. To do this, use the following command:\n$ rm my_file.txt"
   },
   {
     "objectID": "slides.html#moving-files-to-a-new-folder",
     "href": "slides.html#moving-files-to-a-new-folder",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "Moving Files to a new folder",
     "text": "Moving Files to a new folder\nAfter running the following commands, Jamie realizes that she put the files sucrose.dat and maltose.dat into the wrong folder. The files should have been placed in the raw folder.\n$ ls -F\n analyzed/ raw/\n$ ls -F analyzed\nfructose.dat glucose.dat maltose.dat sucrose.dat\n$ cd analyzed\nFill in the blanks to move these files to the raw/ folder (i.e. the one she forgot to put them in)\n$ mv sucrose.dat maltose.dat ____/____"
   },
   {
     "objectID": "slides.html#renaming-files",
     "href": "slides.html#renaming-files",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "Renaming Files",
     "text": "Renaming Files\nSuppose that you created a plain-text file in your current directory to contain a list of the statistical tests you will need to do to analyze your data, and named it statstics.txt\nAfter creating and saving this file you realize you misspelled the filename! You want to correct the mistake, which of the following commands could you use to do so?\n\ncp statstics.txt statistics.txt\nmv statstics.txt statistics.txt\nmv statstics.txt .\ncp statstics.txt ."
   },
   {
     "objectID": "slides.html#moving-and-copying",
     "href": "slides.html#moving-and-copying",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "Moving and Copying",
     "text": "Moving and Copying\nWhat is the output of the closing ls command in the sequence shown below?\n$ pwd\n/Users/jamie/data\n$ ls\nproteins.dat\n$ mkdir recombined\n$ mv proteins.dat recombined/\n$ cp recombined/proteins.dat ../proteins-saved.dat\n$ ls\n\nproteins-saved.dat recombined\nrecombined\nproteins.dat recombined\nproteins-saved.dat"
   },
   {
     "objectID": "slides.html#using-rm-safely",
     "href": "slides.html#using-rm-safely",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "Using rm Safely",
     "text": "Using rm Safely\nWhat happens when we execute rm -i thesis_backup/quotations.txt? Why would we want this protection when using rm?"
   },
   {
     "objectID": "slides.html#copy-with-multiple-filenames",
     "href": "slides.html#copy-with-multiple-filenames",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "Copy with Multiple Filenames",
     "text": "Copy with Multiple Filenames\nFor this exercise, you can test the commands in the shell-lesson-data/exercise-data directory.\nIn the example below, what does cp do when given several filenames and a directory name?\n$ mkdir backup\n$ cp creatures/minotaur.dat creatures/unicorn.dat backup/\nIn the example below, what does cp do when given three or more file names?\n$ cd creatures\n$ ls -F\nbasilisk.dat  minotaur.dat  unicorn.dat\n$ cp minotaur.dat unicorn.dat basilisk.dat"
   },
   {
     "objectID": "slides.html#list-filenames-matching-a-pattern",
     "href": "slides.html#list-filenames-matching-a-pattern",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "List filenames matching a pattern",
     "text": "List filenames matching a pattern\nWhen run in the alkanes directory, which ls command(s) will produce this output?\nethane.pdb   methane.pdb\n\nls *t*ane.pdb\nls *t?ne.*\nls *t??ne.pdb\nls ethane.*"
   },
   {
     "objectID": "slides.html#more-on-wildcards",
     "href": "slides.html#more-on-wildcards",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "More on Wildcards",
     "text": "More on Wildcards\nSam has a directory containing calibration data, datasets, and descriptions of the datasets:\n.\n├── 2015-10-23-calibration.txt\n├── 2015-10-23-dataset1.txt\n├── 2015-10-23-dataset2.txt\n├── 2015-10-23-dataset_overview.txt\n├── 2015-10-26-calibration.txt\n├── 2015-10-26-dataset1.txt\n├── 2015-10-26-dataset2.txt\n├── 2015-10-26-dataset_overview.txt\n├── 2015-11-23-calibration.txt\n├── 2015-11-23-dataset1.txt\n├── 2015-11-23-dataset2.txt\n├── 2015-11-23-dataset_overview.txt\n├── backup\n│   ├── calibration\n│   └── datasets\n└── send_to_bob\n    ├── all_datasets_created_on_a_23rd\n    └── all_november_files\nBefore heading off to another field trip, she wants to back up her data and send some datasets to her colleague Bob. Sam uses the following commands to get the job done:\n$ cp *dataset* backup/datasets\n$ cp ____calibration____ backup/calibration\n$ cp 2015-____-____ send_to_bob/all_november_files/\n$ cp ____ send_to_bob/all_datasets_created_on_a_23rd/\nHelp Sam by filling in the blanks.\nThe resulting directory structure should look like this\n.\n├── 2015-10-23-calibration.txt\n├── 2015-10-23-dataset1.txt\n├── 2015-10-23-dataset2.txt\n├── 2015-10-23-dataset_overview.txt\n├── 2015-10-26-calibration.txt\n├── 2015-10-26-dataset1.txt\n├── 2015-10-26-dataset2.txt\n├── 2015-10-26-dataset_overview.txt\n├── 2015-11-23-calibration.txt\n├── 2015-11-23-dataset1.txt\n├── 2015-11-23-dataset2.txt\n├── 2015-11-23-dataset_overview.txt\n├── backup\n│   ├── calibration\n│   │   ├── 2015-10-23-calibration.txt\n│   │   ├── 2015-10-26-calibration.txt\n│   │   └── 2015-11-23-calibration.txt\n│   └── datasets\n│       ├── 2015-10-23-dataset1.txt\n│       ├── 2015-10-23-dataset2.txt\n│       ├── 2015-10-23-dataset_overview.txt\n│       ├── 2015-10-26-dataset1.txt\n│       ├── 2015-10-26-dataset2.txt\n│       ├── 2015-10-26-dataset_overview.txt\n│       ├── 2015-11-23-dataset1.txt\n│       ├── 2015-11-23-dataset2.txt\n│       └── 2015-11-23-dataset_overview.txt\n└── send_to_bob\n    ├── all_datasets_created_on_a_23rd\n    │   ├── 2015-10-23-dataset1.txt\n    │   ├── 2015-10-23-dataset2.txt\n    │   ├── 2015-10-23-dataset_overview.txt\n    │   ├── 2015-11-23-dataset1.txt\n    │   ├── 2015-11-23-dataset2.txt\n    │   └── 2015-11-23-dataset_overview.txt\n    └── all_november_files\n        ├── 2015-11-23-calibration.txt\n        ├── 2015-11-23-dataset1.txt\n        ├── 2015-11-23-dataset2.txt\n        └── 2015-11-23-dataset_overview.txt"
   },
   {
     "objectID": "slides.html#organizing-directories-and-files",
     "href": "slides.html#organizing-directories-and-files",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "Organizing Directories and Files",
     "text": "Organizing Directories and Files\nJamie is working on a project, and she sees that her files aren’t very well organized:\n$ ls -F\nanalyzed/  fructose.dat    raw/   sucrose.dat\nThe fructose.dat and sucrose.dat files contain output from her data analysis. What command(s) covered in this lesson does she need to run so that the commands below will produce the output shown?\n$ ls -F\nanalyzed/   raw/\n$ ls analyzed\nfructose.dat    sucrose.dat"
   },
   {
     "objectID": "slides.html#reproduce-a-folder-structure",
     "href": "slides.html#reproduce-a-folder-structure",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "Reproduce a folder structure",
     "text": "Reproduce a folder structure\nYou’re starting a new experiment and would like to duplicate the directory structure from your previous experiment so you can add new data.\nAssume that the previous experiment is in a folder called 2016-05-18, which contains a data folder that in turn contains folders named raw and processed that contain data files. The goal is to copy the folder structure of the 2016-05-18 folder into a folder called 2016-05-20 so that your final directory structure looks like this:\n2016-05-20/\n└── data\n   ├── processed\n   └── raw\nWhich of the following set of commands would achieve this objective? What would the other commands do?\n$ mkdir 2016-05-20\n$ mkdir 2016-05-20/data\n$ mkdir 2016-05-20/data/processed\n$ mkdir 2016-05-20/data/raw\n$ mkdir 2016-05-20\n$ cd 2016-05-20\n$ mkdir data\n$ cd data\n$ mkdir raw processed\n$ mkdir 2016-05-20/data/raw\n$ mkdir 2016-05-20/data/processed\n$ mkdir -p 2016-05-20/data/raw\n$ mkdir -p 2016-05-20/data/processed\n$ mkdir 2016-05-20\n$ cd 2016-05-20\n$ mkdir data\n$ mkdir raw processed"
   },
   {
     "objectID": "slides.html#what-does-sort--n-do",
     "href": "slides.html#what-does-sort--n-do",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "What Does sort -n Do?",
     "text": "What Does sort -n Do?\nThe file shell-lesson-data/exercise-data/numbers.txt contains the following lines:\n10\n2\n19\n22\n6\nIf we run sort on this file, the output is:\n10\n19\n2\n22\n6\nIf we run sort -n on the same file, we get this instead:\n2\n6\n10\n19\n22\nExplain why -n has this effect."
   },
   {
     "objectID": "slides.html#what-does-mean",
     "href": "slides.html#what-does-mean",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "What Does >> Mean?",
     "text": "What Does &gt;&gt; Mean?\nWe have seen the use of &gt;, but there is a similar operator &gt;&gt; which works slightly differently. We’ll learn about the differences between these two operators by printing some strings. We can use the echo command to print strings e.g.\n$ echo The echo command prints text\nThe echo command prints text\nNow test the commands below to reveal the difference between the two operators:\n$ echo hello &gt; testfile01.txt\nand:\n$ echo hello &gt;&gt; testfile02.txt\nHint: Try executing each command twice in a row and then examining the output files."
   },
   {
     "objectID": "slides.html#appending-data",
     "href": "slides.html#appending-data",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "Appending Data",
     "text": "Appending Data\nWe have already met the head command, which prints lines from the start of a file. tail is similar, but prints lines from the end of a file instead.\nConsider the file shell-lesson-data/exercise-data/animal-counts/animals.csv. After these commands, select the answer that corresponds to the file animals-subset.csv:\n$ head -n 3 animals.csv &gt; animals-subset.csv\n$ tail -n 2 animals.csv &gt;&gt; animals-subset.csv\n\nThe first three lines of animals.csv\nThe last two lines of animals.csv\nThe first three lines and the last two lines of animals.csv\nThe second and third lines of animals.csv"
   },
   {
     "objectID": "slides.html#piping-commands-together",
     "href": "slides.html#piping-commands-together",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "Piping Commands Together",
     "text": "Piping Commands Together\nIn our current directory, we want to find the 3 files which have the least number of lines. Which command listed below would work?\n\nwc -l * &gt; sort -n &gt; head -n 3\nwc -l * | sort -n | head -n 1-3\nwc -l * | head -n 3 | sort -n\nwc -l * | sort -n | head -n 3"
   },
   {
     "objectID": "slides.html#pipe-reading-comprehension",
     "href": "slides.html#pipe-reading-comprehension",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "Pipe Reading Comprehension",
     "text": "Pipe Reading Comprehension\nA file called animals.csv (in the shell-lesson-data/exercise-data/animal-counts folder) contains the following data:\n2012-11-05,deer,5\n2012-11-05,rabbit,22\n2012-11-05,raccoon,7\n2012-11-06,rabbit,19\n2012-11-06,deer,2\n2012-11-06,fox,4\n2012-11-07,rabbit,16\n2012-11-07,bear,1\nWhat text passes through each of the pipes and the final redirect in the pipeline below? Note, the sort -r command sorts in reverse order.\n$ cat animals.csv | head -n 5 | tail -n 3 | sort -r &gt; final.txt\nHint: build the pipeline up one command at a time to test your understanding"
   },
   {
     "objectID": "slides.html#pipe-construction",
     "href": "slides.html#pipe-construction",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "Pipe Construction",
     "text": "Pipe Construction\nFor the file animals.csv from the previous exercise, consider the following command:\n$ cut -d , -f 2 animals.csv\nThe cut command is used to remove or ‘cut out’ certain sections of each line in the file, and cut expects the lines to be separated into columns by a Tab character. A character used in this way is called a delimiter. In the example above we use the -d option to specify the comma as our delimiter character. We have also used the -f option to specify that we want to extract the second field (column). This gives the following output:\ndeer\nrabbit\nraccoon\nrabbit\ndeer\nfox\nrabbit\nbear\nThe uniq command filters out adjacent matching lines in a file. How could you extend this pipeline (using uniq and another command) to find out what animals the file contains (without any duplicates in their names)?"
   },
   {
     "objectID": "slides.html#which-pipe",
     "href": "slides.html#which-pipe",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "Which Pipe?",
     "text": "Which Pipe?\nThe file animals.csv contains 8 lines of data formatted as follows:\n2012-11-05,deer,5\n2012-11-05,rabbit,22\n2012-11-05,raccoon,7\n2012-11-06,rabbit,19\n...\nThe uniq command has a -c option which gives a count of the number of times a line occurs in its input. Assuming your current directory is shell-lesson-data/exercise-data/animal-counts, what command would you use to produce a table that shows the total count of each type of animal in the file?\n\nsort animals.csv | uniq -c\nsort -t, -k2,2 animals.csv | uniq -c\ncut -d, -f 2 animals.csv | uniq -c\ncut -d, -f 2 animals.csv | sort | uniq -c\ncut -d, -f 2 animals.csv | sort | uniq -c | wc -l"
   },
   {
     "objectID": "slides.html#removing-unneeded-files",
     "href": "slides.html#removing-unneeded-files",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "Removing Unneeded Files",
     "text": "Removing Unneeded Files\nSuppose you want to delete your processed data files, and only keep your raw files and processing script to save storage. The raw files end in .dat and the processed files end in .txt. Which of the following would remove all the processed data files, and only the processed data files?\n\nrm ?.txt\nrm *.txt\nrm * .txt\nrm *.*"
   },
   {
     "objectID": "slides.html#write-your-own-loop",
     "href": "slides.html#write-your-own-loop",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "Write your own loop",
     "text": "Write your own loop\nHow would you write a loop that echoes all 10 numbers from 0 to 9?"
   },
   {
     "objectID": "slides.html#variables-in-loops",
     "href": "slides.html#variables-in-loops",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "Variables in Loops",
     "text": "Variables in Loops\nThis exercise refers to the shell-lesson-data/exercise-data/alkanes directory. ls *.pdb gives the following output:\ncubane.pdb  ethane.pdb  methane.pdb  octane.pdb  pentane.pdb  propane.pdb\nWhat is the output of the following code?\n$ for datafile in *.pdb\n&gt; do\n&gt;     ls *.pdb\n&gt; done\nNow, what is the output of the following code?\n$ for datafile in *.pdb\n&gt; do\n&gt;     ls $datafile\n&gt; done\nWhy do these two loops give different outputs?"
   },
   {
     "objectID": "slides.html#limiting-sets-of-files",
     "href": "slides.html#limiting-sets-of-files",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "Limiting Sets of Files",
     "text": "Limiting Sets of Files\nWhat would be the output of running the following loop in the shell-lesson-data/exercise-data/alkanes directory?\n$ for filename in c*\n&gt; do\n&gt;     ls $filename\n&gt; done\n\nNo files are listed.\nAll files are listed.\nOnly cubane.pdb, octane.pdb and pentane.pdb are listed.\nOnly cubane.pdb is listed.\n\nHow would the output differ from using this command instead?\n$ for filename in *c*\n&gt; do\n&gt;     ls $filename\n&gt; done\n\nThe same files would be listed.\nAll the files are listed this time.\nNo files are listed this time.\nThe files cubane.pdb and octane.pdb will be listed.\nOnly the file octane.pdb will be listed."
   },
   {
     "objectID": "slides.html#doing-a-dry-run",
     "href": "slides.html#doing-a-dry-run",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "Doing a Dry Run",
     "text": "Doing a Dry Run\nA loop is a way to do many things at once — or to make many mistakes at once if it does the wrong thing. One way to check what a loop would do is to echo the commands it would run instead of actually running them.\nSuppose we want to preview the commands the following loop will execute without actually running those commands:\n$ for datafile in *.pdb\n&gt; do\n&gt;     cat $datafile &gt;&gt; all.pdb\n&gt; done\nWhat is the difference between the two loops below, and which one would we want to run?\n# Version 1\n$ for datafile in *.pdb\n&gt; do\n&gt;     echo cat $datafile &gt;&gt; all.pdb\n&gt; done\n# Version 2\n$ for datafile in *.pdb\n&gt; do\n&gt;     echo \"cat $datafile &gt;&gt; all.pdb\"\n&gt; done"
   },
   {
     "objectID": "slides.html#nested-loops",
     "href": "slides.html#nested-loops",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "Nested Loops",
     "text": "Nested Loops\nSuppose we want to set up a directory structure to organize some experiments measuring reaction rate constants with different compounds and different temperatures. What would be the result of the following code:\n$ for species in cubane ethane methane\n&gt; do\n&gt;     for temperature in 25 30 37 40\n&gt;     do\n&gt;         mkdir $species-$temperature\n&gt;     done\n&gt; done"
   },
   {
     "objectID": "slides.html#list-unique-species",
     "href": "slides.html#list-unique-species",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "List Unique Species",
     "text": "List Unique Species\nLeah has several hundred data files, each of which is formatted like this:\n2013-11-05,deer,5\n2013-11-05,rabbit,22\n2013-11-05,raccoon,7\n2013-11-06,rabbit,19\n2013-11-06,deer,2\n2013-11-06,fox,1\n2013-11-07,rabbit,18\n2013-11-07,bear,1\nAn example of this type of file is given in shell-lesson-data/exercise-data/animal-counts/animals.csv.\nWe can use the command cut -d , -f 2 animals.csv | sort | uniq to produce the unique species in animals.csv. In order to avoid having to type out this series of commands every time, a scientist may choose to write a shell script instead.\nWrite a shell script called species.sh that takes any number of filenames as command-line arguments and uses a variation of the above command to print a list of the unique species appearing in each of those files separately."
   },
   {
     "objectID": "slides.html#why-record-commands-in-the-history-before-running-them",
     "href": "slides.html#why-record-commands-in-the-history-before-running-them",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "Why Record Commands in the History Before Running Them?",
     "text": "Why Record Commands in the History Before Running Them?\nIf you run the command:\n$ history | tail -n 5 &gt; recent.sh\nthe last command in the file is the history command itself, i.e., the shell has added history to the command log before actually running it. In fact, the shell always adds commands to the log before running them. Why do you think it does this?"
   },
   {
     "objectID": "slides.html#variables-in-shell-scripts",
     "href": "slides.html#variables-in-shell-scripts",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "Variables in Shell Scripts",
     "text": "Variables in Shell Scripts\nIn the alkanes directory, imagine you have a shell script called script.sh containing the following commands:\nhead -n $2 $1\ntail -n $3 $1\nWhile you are in the alkanes directory, you type the following command:\n$ bash script.sh '*.pdb' 1 1\nWhich of the following outputs would you expect to see?\n\nAll of the lines between the first and the last lines of each file ending in .pdb in the alkanes directory\nThe first and the last line of each file ending in .pdb in the alkanes directory\nThe first and the last line of each file in the alkanes directory\nAn error because of the quotes around *.pdb"
   },
   {
     "objectID": "slides.html#find-the-longest-file-with-a-given-extension",
     "href": "slides.html#find-the-longest-file-with-a-given-extension",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "Find the Longest File With a Given Extension",
     "text": "Find the Longest File With a Given Extension\nWrite a shell script called longest.sh that takes the name of a directory and a filename extension as its arguments, and prints out the name of the file with the most lines in that directory with that extension. For example:\n$ bash longest.sh shell-lesson-data/exercise-data/alkanes pdb\nwould print the name of the .pdb file in shell-lesson-data/exercise-data/alkanes that has the most lines.\nFeel free to test your script on another directory e.g.\n$ bash longest.sh shell-lesson-data/exercise-data/writing txt"
   },
   {
     "objectID": "slides.html#script-reading-comprehension",
     "href": "slides.html#script-reading-comprehension",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "Script Reading Comprehension",
     "text": "Script Reading Comprehension\nFor this question, consider the shell-lesson-data/exercise-data/alkanes directory once again. This contains a number of .pdb files in addition to any other files you may have created. Explain what each of the following three scripts would do when run as bash script1.sh *.pdb, bash script2.sh *.pdb, and bash script3.sh *.pdb respectively.\n# Script 1\necho *.*\n# Script 2\nfor filename in $1 $2 $3\ndo\n    cat $filename\ndone\n# Script 3\necho $@.pdb"
   },
   {
     "objectID": "slides.html#debugging-scripts",
     "href": "slides.html#debugging-scripts",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "Debugging Scripts",
     "text": "Debugging Scripts\nSuppose you have saved the following script in a file called do-errors.sh in Nelle’s north-pacific-gyre directory:\n# Calculate stats for data files.\nfor datafile in \"$@\"\ndo\n    echo $datfile\n    bash goostats.sh $datafile stats-$datafile\ndone\nWhen you run it from the north-pacific-gyre directory:\n$ bash do-errors.sh NENE*A.txt NENE*B.txt\nthe output is blank. To figure out why, re-run the script using the -x option:\n$ bash -x do-errors.sh NENE*A.txt NENE*B.txt\nWhat is the output showing you? Which line is responsible for the error?"
   },
   {
     "objectID": "slides.html#using-grep",
     "href": "slides.html#using-grep",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "Using grep",
     "text": "Using grep\nWhich command would result in the following output:\nand the presence of absence:\n\ngrep \"of\" haiku.txt\ngrep -E \"of\" haiku.txt\ngrep -w \"of\" haiku.txt\ngrep -i \"of\" haiku.txt"
   },
   {
     "objectID": "slides.html#tracking-a-species",
     "href": "slides.html#tracking-a-species",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "Tracking a Species",
     "text": "Tracking a Species\nLeah has several hundred data files saved in one directory, each of which is formatted like this:\n2012-11-05,deer,5\n2012-11-05,rabbit,22\n2012-11-05,raccoon,7\n2012-11-06,rabbit,19\n2012-11-06,deer,2\n2012-11-06,fox,4\n2012-11-07,rabbit,16\n2012-11-07,bear,1\nShe wants to write a shell script that takes a species as the first command-line argument and a directory as the second argument. The script should return one file called &lt;species&gt;.txt containing a list of dates and the number of that species seen on each date. For example using the data shown above, rabbit.txt would contain:\n2012-11-05,22\n2012-11-06,19\n2012-11-07,16\nBelow, each line contains an individual command, or pipe. Arrange their sequence in one command in order to achieve Leah’s goal:\ncut -d : -f 2\n&gt;\n|\ngrep -w $1 -r $2\n|\n$1.txt\ncut -d , -f 1,3\nHint: use man grep to look for how to grep text recursively in a directory and man cut to select more than one field in a line.\nAn example of such a file is provided in shell-lesson-data/exercise-data/animal-counts/animals.csv"
   },
   {
     "objectID": "slides.html#little-women",
     "href": "slides.html#little-women",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "Little Women",
     "text": "Little Women\nYou and your friend, having just finished reading Little Women by Louisa May Alcott, are in an argument. Of the four sisters in the book, Jo, Meg, Beth, and Amy, your friend thinks that Jo was the most mentioned. You, however, are certain it was Amy. Luckily, you have a file LittleWomen.txt containing the full text of the novel (shell-lesson-data/exercise-data/writing/LittleWomen.txt). Using a for loop, how would you tabulate the number of times each of the four sisters is mentioned?\nHint: one solution might employ the commands grep and wc and a |, while another might utilize grep options. There is often more than one way to solve a programming task, so a particular solution is usually chosen based on a combination of yielding the correct result, elegance, readability, and speed."
   },
   {
     "objectID": "slides.html#matching-and-subtracting",
     "href": "slides.html#matching-and-subtracting",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "Matching and Subtracting",
     "text": "Matching and Subtracting\nThe -v option to grep inverts pattern matching, so that only lines which do not match the pattern are printed. Given that, which of the following commands will find all .dat files in creatures except unicorn.dat? Once you have thought about your answer, you can test the commands in the shell-lesson-data/exercise-data directory.\n\nfind creatures -name \"*.dat\" | grep -v unicorn\nfind creatures -name *.dat | grep -v unicorn\ngrep -v \"unicorn\" $(find creatures -name \"*.dat\")\nNone of the above."
   },
   {
     "objectID": "slides.html#find-pipeline-reading-comprehension",
     "href": "slides.html#find-pipeline-reading-comprehension",
-    "title": "software.carpintery.shell.nestor.github.io",
+    "title": "Introducing the Shell",
     "section": "find Pipeline Reading Comprehension",
     "text": "find Pipeline Reading Comprehension\nWrite a short explanatory comment for the following shell script:\nwc -l $(find . -name \"*.dat\") | sort -n"
   },
